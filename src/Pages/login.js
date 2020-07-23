@@ -1,5 +1,6 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import FacebookLogin from 'react-facebook-login';
+import { Card, Image } from 'react-bootstrap';
 import {
   BrowserRouter as Router,
   Switch,
@@ -8,6 +9,22 @@ import {
 } from "react-router-dom";
 
 function Home() {
+  const [login, setLogin] = useState(false);
+  const [data, setData] = useState({});
+  const [picture, setPicture] = useState('');
+
+  const responseFacebook = (response) => {
+    console.log(response);
+    setData(response);
+    setPicture(response.picture.data.url);
+    if (response.accessToken) {
+      setLogin(true);
+    } else {
+      setLogin(false);
+    }
+  }
+
+
   return <>
     <div >
       {/* Container containing all contents */}
@@ -16,6 +33,21 @@ function Home() {
           <div className="col-12 col-md-9 col-lg-7 col-xl-6">
             {/* White Container */}
             <div className="container bg-white rounded mt-2 mb-2 px-0">
+
+            { !login && 
+            <FacebookLogin
+              appId="562118384400275"
+              autoLoad={true}
+              fields="name,email,picture"
+              scope="public_profile,user_friends"
+              callback={responseFacebook}
+              icon="fa-facebook" />
+          }
+          { login &&
+            <Image src={picture} roundedCircle />
+          }
+
+
               {/* Main Heading */}
               <div className="row justify-content-center align-items-center pt-3">
                 <h1><strong>Login</strong></h1>
