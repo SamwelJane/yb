@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/617e51fc-9c0b-45fc-9255-ab7a41de5205/deploy-status)](https://app.netlify.com/sites/yboa-staging/deploys)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
