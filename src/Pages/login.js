@@ -1,4 +1,4 @@
-import React,{ useState } from 'react';
+import React, { useState } from 'react';
 import FacebookLogin from 'react-facebook-login';
 import { Card, Image } from 'react-bootstrap';
 import {
@@ -15,6 +15,10 @@ function Home() {
 
   const responseFacebook = (response) => {
     console.log(response);
+    if (response.status == "unknown") {
+      return;
+    }
+
     setData(response);
     setPicture(response.picture.data.url);
     if (response.accessToken) {
@@ -34,18 +38,18 @@ function Home() {
             {/* White Container */}
             <div className="container bg-white rounded mt-2 mb-2 px-0">
 
-            { !login && 
-            <FacebookLogin
-              appId="562118384400275"
-              autoLoad={true}
-              fields="name,email,picture"
-              scope="public_profile,user_friends"
-              callback={responseFacebook}
-              icon="fa-facebook" />
-          }
-          { login &&
-            <Image src={picture} roundedCircle />
-          }
+              {!login &&
+                <FacebookLogin
+                  appId="415608319359882"
+                  autoLoad={true}
+                  fields="name,email,picture"
+                  scope="public_profile,user_friends"
+                  callback={responseFacebook}
+                  icon="fa-facebook" />
+              }
+              {login &&
+                <Image src={picture} roundedCircle />
+              }
 
 
               {/* Main Heading */}
@@ -55,7 +59,7 @@ function Home() {
               {/* Alternative Login */}
               <div className="mx-0 px-0 bg-light">
                 <div className="pt-4">
-                 
+
                   <div className="row justify-content-center">
                     <h5>With your social media account</h5>
                   </div> {/* Social Media Login buttons */}
